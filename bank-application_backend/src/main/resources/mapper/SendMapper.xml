@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cultural_mixers.bank_application_backend.dao.SendDao">
+
+    <resultMap id="BaseResultMap" type="com.cultural_mixers.bank_application_backend.domain.Send">
+        <id property="send_id" column="send_id" jdbcType="INTEGER"/>
+        <result property="se_user_id" column="se_user_id" jdbcType="INTEGER"/>
+        <result property="re_user_id" column="re_user_id" jdbcType="INTEGER"/>
+        <result property="money" column="money" jdbcType="DOUBLE"/>
+        <result property="time" column="time" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+
+    <!--送金処理-->
+    <update id="sendMoney">
+        update bank.user a
+        <set>
+            <if test="money != null and money != ''">
+                a.balance = a.balance - #{money},
+            </if>
+        </set>
+        where user_id = #{se_user_id}
+    </update>
+
+    <!--受取処理-->
+    <update id="receiveMoney">
+        update bank.user a
+        <set>
+            <if test="money != null and money != ''">
+                a.balance = a.balance + #{money},
+            </if>
+        </set>
+        where user_id = #{re_user_id}
+    </update>
+
+    <!--送金記録-->
+    <insert id="sendRecords">
+        insert into bank.send(se_user_id, re_user_id, money, time, message)
+                    VALUES (#{se_user_id}, #{re_user_id},  #{money}, current_timestamp, #{message})
+    </insert>
+
+
+
+</mapper>
+

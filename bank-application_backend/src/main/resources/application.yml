@@ -1,0 +1,15 @@
+server:
+  port: 9001
+
+spring:
+  profiles:
+    active: dev
+    # active: prod
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+

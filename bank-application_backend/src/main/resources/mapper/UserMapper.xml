@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cultural_mixers.bank_application_backend.dao.UserDao">
+
+    <resultMap id="BaseResultMap" type="com.cultural_mixers.bank_application_backend.domain.User">
+        <id property="user_id" column="user_id" jdbcType="INTEGER"/>
+        <result property="account_number" column="account_number" jdbcType="INTEGER"/>
+        <result property="balance" column="balance" jdbcType="DOUBLE"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="icon" column="icon" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <!--すべてのユーザー情報を検索する-->
+    <select id="selectALL" resultType="com.cultural_mixers.bank_application_backend.domain.User">
+        select a.user_id, account_number, balance, name, icon
+        from bank.user a
+    </select>
+
+    <!--ユーザー1人情報を検索する-->
+    <select id="selectByUser_id" resultType="com.cultural_mixers.bank_application_backend.domain.User">
+        select a.user_id, account_number, balance, name, icon
+        from bank.user a
+        <where>
+            <if test="user_id != null and user_id != '' ">
+                a.user_id  = #{user_id}
+            </if>
+        </where>
+    </select>
+
+    <!--自分以外のユーザーの情報を検索する-->
+    <select id="selectUserList" resultType="com.cultural_mixers.bank_application_backend.domain.User">
+        select a.user_id, account_number, balance, name, icon
+        from bank.user a
+        <where>
+            <if test="user_id != null and user_id != '' ">
+                a.user_id  != #{user_id}
+            </if>
+        </where>
+    </select>
+
+    <!--口座残高を検索する-->
+    <select id="selectBalance" resultType="com.cultural_mixers.bank_application_backend.domain.User">
+        select a.balance
+        from bank.user a
+        <where>
+            <if test="user_id != null and user_id != '' ">
+                a.user_id  = #{user_id}
+            </if>
+        </where>
+    </select>
+
+
+
+</mapper>
+

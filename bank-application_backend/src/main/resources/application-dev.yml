@@ -1,0 +1,12 @@
+# application-dev.yml (development)
+
+spring:
+# MySQL
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/bank?serverTimezone=UTC&serverTimezone=GMT%2b8&characterEncoding=utf8
+      username: root
+      password: 123456
+  jackson:
+    time-zone: GMT+8
