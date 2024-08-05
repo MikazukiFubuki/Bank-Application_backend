@@ -1,12 +1,12 @@
-# application-prod.yml (AWS)
+# application-prod.yml (AWS Server)
 
 spring:
 # MySQL
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/anime?serverTimezone=UTC&serverTimezone=GMT%2b8&characterEncoding=utf8
-      username: root
-      password: fubuki0728anime
+      url: jdbc:mysql://localhost:3306/bank?serverTimezone=UTC&serverTimezone=GMT%2b8&characterEncoding=utf8
+      username:
+      password:
   jackson:
     time-zone: GMT+8
