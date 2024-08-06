@@ -20,7 +20,7 @@ public class SendServiceImpl extends ServiceImpl<SendDao, Send> implements SendS
         try {
 
             
-            int balance = sendDao.selectBalance(send);
+            double balance = sendDao.selectBalance(send.getSe_user_id());
             if (balance < send.getMoney()) {
                 return false;
             }
@@ -43,4 +43,5 @@ public class SendServiceImpl extends ServiceImpl<SendDao, Send> implements SendS
     //     sendDao.sendRecords(send);
     //     return true;
     // }
+    }
 }
