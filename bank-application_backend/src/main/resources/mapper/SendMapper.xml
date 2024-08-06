@@ -42,6 +42,17 @@
                     VALUES (#{se_user_id}, #{re_user_id},  #{money}, current_timestamp, #{message})
     </insert>
 
+    <!--すべての送金記録を検索する-->
+    <!--<select id="selectRecords" resultType="com.cultural_mixers.bank_application_backend.domain.Send">
+        select a.send_id, se_user_id, a.re_user_id, b.name, money, time, message
+        from bank.send a left join bank.user b on a.re_user_id = b.user_id
+        <where>
+            <if test="user_id != null and user_id != '' ">
+                a.se_user_id  = #{user_id}
+            </if>
+        </where>
+    </select>-->
+
 
 
 </mapper>

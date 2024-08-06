@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cultural_mixers.bank_application_backend.dao.PayDao">
+
+    <resultMap id="BaseResultMap" type="com.cultural_mixers.bank_application_backend.domain.Pay">
+        <id property="pay_id" column="pay_id" jdbcType="INTEGER"/>
+        <result property="request_id" column="request_id" jdbcType="INTEGER"/>
+        <result property="pay_user_id" column="pay_user_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+
+
+    <!--支払処理-->
+    <insert id="payment">
+        insert into bank.pay(request_id, pay_user_id)
+        VALUES (#{request_id}, #{pay_user_id})
+    </insert>
+
+    <!--支払い済み-->
+    <select id="selectPaid" resultMap="BaseResultMap">
+        select a.pay_id, a.request_id, a.pay_user_id, b.user_id as user_id, b.name as name, b.icon as icon
+        from bank.pay a left join bank.user b on a.pay_user_id = b.user_id
+        <where>
+            <if test="request_id != null and request_id != '' ">
+                a.request_id  = #{request_id}
+            </if>
+        </where>
+    </select>
+
+
+
+
+
+</mapper>
+

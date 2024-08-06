@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cultural_mixers.bank_application_backend.dao.RequestDao">
+
+    <resultMap id="BaseResultMap" type="com.cultural_mixers.bank_application_backend.domain.Request">
+        <id property="request_id" column="request_id" jdbcType="INTEGER"/>
+        <result property="req_user_id" column="req_user_id" jdbcType="INTEGER"/>
+        <result property="money" column="money" jdbcType="DOUBLE"/>
+        <result property="request_time" column="request_time" jdbcType="VARCHAR"/>
+        <result property="message" column="message" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <!--請求処理-->
+    <insert id="reqMoney">
+        insert into bank.request(req_user_id, money, request_time, message)
+        VALUES (#{req_user_id}, #{money}, current_timestamp , #{message} )
+    </insert>
+
+    <!--請求ID-->
+    <select id="selectRequestId" resultMap="BaseResultMap">
+        select a.request_id
+        from bank.request a
+        <where>
+            <if test="req_user_id != null and req_user_id != '' ">
+                a.req_user_id  = #{req_user_id}
+            </if>
+            <if test="money != null and money != '' ">
+                and a.money  = #{money}
+            </if>
+            <if test="message != null and message != '' ">
+                and a.message  = #{message}
+            </if>
+        </where>
+    </select>
+
+    <!--請求情報-->
+    <select id="selectRequest" resultMap="BaseResultMap">
+        select a.request_id, req_user_id, money, request_time, message, CONCAT('/reqMoney/', a.request_id) AS link
+        from bank.request a
+        <where>
+            <if test="request_id != null and request_id != '' ">
+                a.request_id  = #{request_id}
+            </if>
+        </where>
+    </select>
+
+    <!--請求履歴-->
+    <select id="selectRequestIdByReq_user_id" resultMap="BaseResultMap">
+        select a.request_id
+        from bank.request a
+        <where>
+            <if test="req_user_id != null and req_user_id != '' ">
+                a.req_user_id  = #{req_user_id}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectHistory" resultMap="BaseResultMap">
+        select a.request_id, req_user_id, money, request_time, message, CONCAT('/reqMoney/', a.request_id) AS link
+        from bank.request a
+        <where>
+            <if test="req_user_id != null and req_user_id != '' ">
+                a.req_user_id  = #{req_user_id}
+            </if>
+        </where>
+    </select>
+
+
+
+
+
+</mapper>
+

@@ -40,16 +40,5 @@ public class SendServiceImpl extends ServiceImpl<SendDao, Send> implements SendS
             return false;
         }
 
-    // @Override
-    // public boolean receiveMoney(Send send) {
-    //     sendDao.receiveMoney(send);
-    //     return true;
-    // }
-
-    // @Override
-    // public boolean sendRecords(Send send) {
-    //     sendDao.sendRecords(send);
-    //     return true;
-    // }
     }
 }

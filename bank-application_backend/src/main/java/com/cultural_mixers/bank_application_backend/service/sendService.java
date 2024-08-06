@@ -11,16 +11,4 @@ public interface SendService extends IService<Send> {
      * @param send
      */
     boolean sendMoney(Send send);
-
-    /**
-     * 受取処理
-     * @param send
-     */
-    boolean receiveMoney(Send send);
-
-    /**
-     * 送金記録
-     * @param send
-     */
-    boolean sendRecords(Send send);
 }

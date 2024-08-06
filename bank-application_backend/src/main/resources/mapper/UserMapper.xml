@@ -14,13 +14,13 @@
 
 
     <!--すべてのユーザー情報を検索する-->
-    <select id="selectALL" resultType="com.cultural_mixers.bank_application_backend.domain.User">
+    <select id="selectALL" resultMap="BaseResultMap">
         select a.user_id, account_number, balance, name, icon
         from bank.user a
     </select>
 
     <!--ユーザー1人情報を検索する-->
-    <select id="selectByUser_id" resultType="com.cultural_mixers.bank_application_backend.domain.User">
+    <select id="selectByUser_id" resultMap="BaseResultMap">
         select a.user_id, account_number, balance, name, icon
         from bank.user a
         <where>
@@ -31,7 +31,7 @@
     </select>
 
     <!--自分以外のユーザーの情報を検索する-->
-    <select id="selectUserList" resultType="com.cultural_mixers.bank_application_backend.domain.User">
+    <select id="selectUserList" resultMap="BaseResultMap">
         select a.user_id, account_number, balance, name, icon
         from bank.user a
         <where>
@@ -42,7 +42,7 @@
     </select>
 
     <!--口座残高を検索する-->
-    <select id="selectBalance" resultType="com.cultural_mixers.bank_application_backend.domain.User">
+    <select id="selectBalance" resultMap="BaseResultMap">
         select a.balance
         from bank.user a
         <where>
@@ -51,7 +51,6 @@
             </if>
         </where>
     </select>
-
 
 
 </mapper>

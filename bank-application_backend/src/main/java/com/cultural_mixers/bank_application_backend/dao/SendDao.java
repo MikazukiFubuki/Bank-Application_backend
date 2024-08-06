@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cultural_mixers.bank_application_backend.domain.Send;
 import com.cultural_mixers.bank_application_backend.domain.User;
 
+import java.util.List;
+
 public interface SendDao extends BaseMapper<Send> {
 
     /**
@@ -23,4 +25,11 @@ public interface SendDao extends BaseMapper<Send> {
      * @param send
      */
     void sendRecords(Send send);
+
+    /**
+     * すべての送金記録を検索する
+     * @param user_id
+     * @return
+     */
+    /*List<Send> selectRecords(Integer user_id);*/
 }
