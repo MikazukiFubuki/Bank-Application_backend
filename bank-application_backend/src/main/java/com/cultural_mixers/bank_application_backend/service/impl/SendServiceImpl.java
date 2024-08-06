@@ -16,17 +16,31 @@ public class SendServiceImpl extends ServiceImpl<SendDao, Send> implements SendS
     private SendDao sendDao;
 
     @Override
-    public void sendMoney(Send send) {
-        sendDao.sendMoney(send);
-    }
+    public boolean sendMoney(Send send) {
+        try {
 
-    @Override
-    public void receiveMoney(Send send) {
-        sendDao.receiveMoney(send);
-    }
+            
+            int balance = sendDao.selectBalance(send);
+            if (balance < send.getMoney()) {
+                return false;
+            }
+            sendDao.sendMoney(send);
+            sendDao.receiveMoney(send);
+            sendDao.sendRecords(send);
+            return true
+        } catch (Exception e) {
+            return false
+        }
 
-    @Override
-    public void sendRecords(Send send) {
-        sendDao.sendRecords(send);
-    }
+    // @Override
+    // public boolean receiveMoney(Send send) {
+    //     sendDao.receiveMoney(send);
+    //     return true;
+    // }
+
+    // @Override
+    // public boolean sendRecords(Send send) {
+    //     sendDao.sendRecords(send);
+    //     return true;
+    // }
 }
